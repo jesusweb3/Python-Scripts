@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  telegram-forwarder-bot:
+    build: .
+    container_name: telegram-forwarder-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      # Монтируем логи для доступа с хоста
+      - ./logs:/app/logs
+    # Ограничение ресурсов (опционально)
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
